@@ -2,17 +2,17 @@ import Menu from "./-Menu";
 import Navbar from "./-Navbar";
 import { useState } from "react";
 
-const MenuHeader = () => {
-  const [isActive, setState] = useState(false);
+const MenuHeader = ({ bgActive }) => {
+  const [isOpen, setOpen] = useState(null);
 
   const toggleClass = () => {
-    setState(!isActive)
+    setOpen(prevState => !prevState);
   };
 
   return (
     <>
-      <Menu isActive={isActive}/>
-      <Navbar handleClickButton={toggleClass} isActive={isActive}/>
+      <Menu isOpen={isOpen} handleClickButton={toggleClass}/>
+      <Navbar handleClickButton={toggleClass} bgActive={bgActive} isOpen={isOpen}/>
     </>
   );
 };
