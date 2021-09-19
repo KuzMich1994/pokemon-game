@@ -1,9 +1,6 @@
 import Header from "../../components/Header/Header.jsx";
 import Layout from "../../components/Layout/Layout.jsx";
 import bgUrl from '../../components/Layout/img/background.jpg';
-import POKEMON_LIST from '../../api/pokemon-list.json';
-import PokemonCard from "../../components/PokemonCard/PokemonCard.jsx";
-import s from './style.module.css';
 
 function HomePage({ onChangePage }) {
   const title = 'This is title';

@@ -4,3 +4,8 @@
   align-items: center;
   flex-wrap: wrap;
 }
+.centeredButton {
+  display: block;
+  margin: auto;
+  margin-bottom: 30px;
+}
