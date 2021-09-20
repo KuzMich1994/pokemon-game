@@ -1,6 +1,5 @@
 import s from './style.module.css';
 import cardBack from './img/card-back-side.jpg';
-import { useState } from 'react';
 import cn from 'classnames';
 
 const PokemonCard = ({ img, name, type, id, values: {top, left, right, bottom}, onChangeIsActive, isActive }) => {
