@@ -1,10 +1,10 @@
 import s from './style.module.css';
 import cn from 'classnames';
 
-const PokemonCard = ({ img, name, type, id, values: {top, left, right, bottom}, onChangeIsActive, isActive, className, minimize, isSelected }) => {
+const PokemonCard = ({ img, name, type, id, values, handleClickCard, isActive, className, minimize, isSelected }) => {
 
     const handleClick = () => {
-        onChangeIsActive && onChangeIsActive(id);
+        handleClickCard && handleClickCard(id);
     }
 
     return (
@@ -20,10 +20,10 @@ const PokemonCard = ({ img, name, type, id, values: {top, left, right, bottom}, 
                 <div className={cn(s.wrap, s.front)}>
                     <div className={cn(s.pokemon, s[type])}>
                         <div className={s.values}>
-                            <div className={cn(s.count, s.top)}>{top}</div>
-                            <div className={cn(s.count, s.right)}>{right}</div>
-                            <div className={cn(s.count, s.bottom)}>{bottom}</div>
-                            <div className={cn(s.count, s.left)}>{left}</div>
+                            <div className={cn(s.count, s.top)}>{values.top}</div>
+                            <div className={cn(s.count, s.right)}>{values.right}</div>
+                            <div className={cn(s.count, s.bottom)}>{values.bottom}</div>
+                            <div className={cn(s.count, s.left)}>{values.left}</div>
                         </div>
                         <div className={s.imgContainer}>
                             <img src={img} alt={name} />

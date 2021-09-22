@@ -5,11 +5,12 @@ import Layout from '../../../../components/Layout/Layout.jsx';
 import s from './style.module.css';
 import { FireBaseContext } from "../../../../context/firebaseContext";
 import { PokemonContext } from "../../../../context/pokemonContext";
+import { useHistory } from "react-router";
 
 const StartPage = () => {
   const firebase = useContext(FireBaseContext);
-  const pokemonContext = useContext(PokemonContext);
-  console.log('pokemonContext: ', pokemonContext);
+  const pokemonsContext = useContext(PokemonContext);
+  const history = useHistory();
   const [pokemons, setPokemonState] = useState({});
 
   useEffect(() => {
@@ -21,7 +22,8 @@ const StartPage = () => {
   }, []);
 
   const handleChangeSelected = (key) => {
-    console.log(pokemons);
+    const pokemon = {...pokemons[key]};
+    pokemonsContext.onSelectedPokemons(key, pokemon);
     setPokemonState(prevState => ({
       ...prevState,
       [key]: {
@@ -31,12 +33,21 @@ const StartPage = () => {
     }));
   };
 
+  const handleStartGameClick = () => {
+    history.push('/game/board');
+  };
 
   return (
     <>
       <Layout title='Game-page'>
 
-        <button className={s.centeredButton}>Start Game</button>
+        <button 
+          onClick={handleStartGameClick} 
+          className={s.centeredButton}
+          disabled={Object.keys(pokemonsContext.pokemons).length < 5}
+        >
+          Start Game
+        </button>
   
         <div className={s.flex}>
           {
@@ -49,9 +60,13 @@ const StartPage = () => {
                 type={type}
                 id={id}
                 img={img}
-                isSelect={selected}
-                onChangeIsActive={() => handleChangeSelected(key)}
                 isActive={true}
+                isSelected={selected}
+                handleClickCard={() => {
+                  if (Object.keys(pokemonsContext.pokemons).length < 5 || selected) {
+                    handleChangeSelected(key);
+                  }
+                }}
               />
             ))
           }
